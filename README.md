@@ -20,7 +20,7 @@
  }
 ```
 
-// 除以上类似情况，其他全部使用 ===
+  >除以上类似情况，其他全部使用 ===
 
 3.  JS 中有哪些内置函数
     `Object Array Boolean Number String Function Date RegExp Error`
@@ -127,7 +127,7 @@
   · 所有的函数，都有一个 prototype （显示原型） 属性，属性值也是一个普通的对象
   · 所有的引用类型（数组、对象、函数），\_\_proto\_\_ 属性值指向它的构造函数的 'prototype' 属性值
   · 当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的\_\_proto\_\_（即它的构造函数的 prototype）中寻找。
-示例
+**示例**
 ```
   function Foo(name, age) {
     this.name = name
