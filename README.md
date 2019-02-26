@@ -158,4 +158,4 @@
 
 ```
 
-![JavaScript]('./JavaScript原型链.png')
+![JavaScript](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE.png)
