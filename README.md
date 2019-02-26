@@ -97,12 +97,74 @@
       console.log(!!a) // !! 用于变量判断
     ```
 7. 如何准确判断一个变量是数组类型
-  变量 instanceof Array 
+  ```
+    var arr = []
+    arr instanceof Array // true
+    typeof arr // object, typeof 是无法判断是否时数组的
+  ```
 
 8. 写一个原型链继承的例子
+  ```
+    // 简单例子
+    function Animal() {
+      this.eat = function() {
+        console.log('animal eat')
+      }
+    }
+
+    function Dog() {
+      this.bark = function() {
+        console.log('dog bark')
+      }
+    }
+
+    Dog.prototype = new Animal()
+
+    var hashiqi = new Dog()
+
+    // 贴近实际开发原型链继承的例子
+    function Elem(id) {
+      this.elem = document.getElementById(id)
+    }
+
+    Elem.prototype.html = function(val) {
+      var elem = this.elem
+      if (val) {
+        elem.innerHTML = val
+        return this // 链式操作
+      } else {
+        return elem.innerHTML
+      }
+    }
+    
+    Elem.prototype.on = function(type, fn) {
+      var elem = this.elem
+      elem.addEventListener(type, fn)
+    }
+
+    var div1 = new Elem('div1')
+    div1.html('<p>hello</p>')
+    div1.on('click', function () {
+      alert('click')
+    })
+
+  ```
+
+
 9. 描述 new 一个对象的过程
-10. zepto (或其他框架) 源码中如何使用原型链 
-11. 构造函数
+  ```
+    // this 指向这个新对象
+    function Foo(name, age) {
+      // 执行代码，对 this 赋值
+      this.name = name
+      this.age = age
+      // 返回 this
+    }
+    // 1. 创建一个新对象
+    var f = new Foo('Leo', 29)
+  ```
+
+10. 构造函数
   ```
     function Foo(name, age) {
       this.name = name
@@ -121,7 +183,7 @@
     function Foo() {...} // 是 var Foo = new Function(...)
     // 使用 instanceof 判断一个函数是否是一个变量的构造函数
   ```
-12. 原型规则和示例
+11. 原型规则和示例
   · 所有的引用类型（数组、对象、函数），都具有对象特性，即可自由扩展属性（除了 'null' 以外）
   · 所有的引用类型（数组、对象、函数），都有一个 \_\_proto\_\_ (隐式原型) 属性。属性值是一个普通的对象
   · 所有的函数，都有一个 prototype （显示原型） 属性，属性值也是一个普通的对象
@@ -158,4 +220,7 @@
 
 ```
 
-![JavaScript](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE.png)
+![JavaScript原型链示意图 ](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE.png)
+
+
+12.
