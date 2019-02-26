@@ -28,12 +28,12 @@
 4.  JS 变量按照存储方式区分为哪些类型，并描述其特点
     · 值类型
 
-        ```
-        var a = 100
-        var b = a
-        a = 200
-        console.log(b) // 100
-        ```
+      ```
+      var a = 100
+      var b = a
+      a = 200
+      console.log(b) // 100
+      ```
 
         a 和 b 赋值操作，
 
@@ -144,5 +144,5 @@
 
   f.printName()
   f.alertName()
-  
+
 ```
