@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css 盒模型</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+  </style>
+</head>
+<body>
+  <section id="sec">
+    <style>
+      #sec {
+        background: #f00;
+        overflow: hidden; // BFC 块级格式化上下文
+      }
+      .child {
+        height: 100px;
+        margin-top: 10px;
+        background: yellow;
+        position: relative;
+      }
+    </style>
+    <article class="child"></article>
+  </section>
+
+  <!-- BFC垂直方向边距重叠 -->
+  <section id="margin">
+    <style>
+      #margin {
+        background: pink;
+        overflow: hidden;
+      }
+
+      #margin>p {
+        margin: 5px auto 25px;
+        background: red;
+      }
+    </style>
+    <p>1</p>
+    <div style="overflow: hidden">
+      <p>2</p>
+    </div>
+    <p>3</p>
+  </section>
+  
+  <!-- BFC 不与 float 重叠 -->
+  <section id="layout">
+    <style>
+      #layout {
+        background: red;
+      }
+      #layout .left {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: pink;
+      }
+      #layout .right {
+        height: 110px;
+        background: #ccc;
+        overflow: auto;
+      }
+    </style>
+    <div class="left"></div>
+    <div class="right"></div>
+  </section>
+
+  <!-- BFC 子元素即使是 float 也会参与高度计算 -->
+  <section id="float">
+    <style>
+      #float {
+        background: red;
+        float: left;
+        /* overflow: auto; */
+      }
+      #float .float {
+        float: left;
+        font-size: 30px;
+      }
+    </style>
+
+    <div class="float">我是浮动元素</div>
+    <script>
+      var dom = document.getElementById('float')
+      dom.addEventListener('click', function (e) {
+        console.log('====================================');
+        console.log(e.currentTarget);
+        console.log(e);
+        console.log('====================================');
+        
+      })
+    </script>
+  </section>
+
+</body>
+</html>
