@@ -223,4 +223,205 @@
 ![JavaScript原型链示意图 ](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE.png)
 
 
-12.
+12. 说一下对变量提升的理解
+  · 变量定义
+  · 函数声明（注意和函数表达式的区别）
+  
+13. 说明 this 几种不同的使用场景
+  · 作为构造函数执行
+  · 作为对象属性执行
+  · 作为普通函数执行
+  · call apply bind
+
+14. 创建 10 个 \<a\> 标签，点击的时候弹出来对应的序号
+  ```
+    // 错误写法
+    var i, a
+    for (i = 0; i < 10; i++) {
+      a = document.createElement('a')
+      a.innerHTML = i + '<br>'
+      a.addEventListener('click', function (e) {
+        e.preventDefault()
+        alert(i)
+      })
+      document.body.appendChild(a)
+    }
+
+    // 正确
+    var i
+    for (i = 0; i < 10; i++) {
+      (function (i) {
+        var a = document.createElement('a')
+        a.innerHTML = i + '<br>'
+        a.addEventListener('click', function (e) {
+          e.preventDefault()
+          alert(i)
+        })
+        document.body.appendChild(a)
+      })(i)
+    }
+  ```
+15. 如何理解作用域
+  · 自由变量
+  · 作用域链，即自由变量的查找
+  · 闭包的两个场景 // 函数作为返回值，函数做为参数
+
+16. 实际开发中闭包的应用
+  ```
+    function isFirstLoad() {
+      var _list = []
+      return function (id) {
+        if (_list.indexOf(id) >= 0) {
+          return false
+        } else {
+          _list.push(id)
+          return true
+        }
+      }
+    }
+    var firstLoad = isFirstLoad()
+    firstLoad(10)
+  ```
+
+17. 同步和异步的区别是什么？分别举一个同步和异步的例子
+  · 同步会阻塞代码执行，而异步不会
+  · alert 是同步，setTimeout 是异步
+
+18. 前端使用异步的场景
+  · 定时任务：setTimeout，setInterval
+  · 网络请求：ajax 请求，动态 <img> 加载
+  · 事件绑定
+
+19. 获取 2019-02-27 格式的日前
+  ```
+    function formatDate(dt) {
+      if (!dt) {
+        dt = new Date()
+      }
+      var year = dt.getFullYear()
+      var month = dt.getMonth() + 1
+      var date = dt.getDate()
+      if (month < 10) {
+        month = '0' + month
+      }
+      if (date < 10) {
+        date = '0' + date
+      }
+
+      return year + '-' + month + '-' + date
+    }
+
+    var dt = new Date()
+    var formatDate = formatDate(dt)
+    console.log(formatDate)
+  ```
+
+20. 获取随机数。要求是长度一致的字符串格式
+
+  ```
+    var random = Math.random()
+    random = random + '0000000000' 
+    random = random.slice(0, 10)
+    console.log(random)
+  ```
+21. 写一个能遍历对象和数组的 forEach 函数
+  ```
+    function forEach(obj, fn) {
+      var key
+      if (obj instanceof Array) {
+        obj.forEach(function (item, index) {
+          fn(index, item)
+        })
+      } else {
+        for (key in obj) {
+          fn(key, obj[key])
+        }
+      }
+    }
+
+    var arr = [1, 2, 3]
+
+    forEach(arr, function (index, item) {
+      console.log(index, item)
+    })
+
+    var obj = {x: 100, y: 200}
+    forEach(obj, function (key, value) {
+      console.log(key, value)
+    })
+  ```
+
+22. DOM 结构操作
+
+  ```
+    var div1 = document.getElementById('div1')
+    // 添加新节点
+    var p1 = document.createElement('p')
+    p1.innerHTML = 'this is p1'
+    div1.appendChild(p1)
+    // 移除已有节点
+    var p2 = document.getElementById('p2')
+    div1.appendChild(p2)
+
+    // 获取父子元素
+    var div = document.getElementById('div1')
+    var parent = div.parentElement
+
+    var child = div.childNodes
+
+  ```
+23. DOM 节点的 Attribute 和 property 有何区别
+  · property 只是一个 JS 对象的属性的修改
+  · Attribute 是对 html 标签属性的修改
+
+24. BOM (Browser Object Model) 操作
+
+25. 如何检测浏览器的类型
+  ```
+      var ua = navigator.userAgent
+      var isChrome = ua.indexOf('Chrome')
+      console.log(isChrome)
+  ```
+
+26. 拆解 URL 的个部分
+  · navigator // 浏览器
+    ```
+      var ua = navigator.userAgent
+      var isChrome = ua.indexOf('Chrome')
+      console.log(isChrome)
+    ```
+
+    · screen  // 屏幕
+    ```
+      console.log(screen.width)
+      console.log(screen.height)
+    ```
+    
+    · location // 地址
+    ```
+      console.log(location.href) // 整个 URL
+      console.log(location.host) // 域名
+      console.log(location.protocol) // 'http:' 'https:'
+      console.log(location.pathname) // '/learn/123'
+      console.log(location.search) 
+      console.log(location.hash)
+    ```
+    
+    · history // 历史
+      ```
+        history.back()
+        history.forward()
+      ```
+
+27. 编写一个通用的事件监听函数
+  ```
+    // 普通写法
+    var btn = document.getElementById('btn1')
+    btn.addEventListener('click', function (event) {
+      console.log('clicked')
+    })
+  ```
+
+28. 描述事件冒泡流程
+
+29. 对于一个无限下拉加载图片的页面，如何给每个图片绑定事件
