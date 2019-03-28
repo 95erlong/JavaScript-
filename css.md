@@ -268,4 +268,122 @@
     * WebSocket
     * CORS
   * 如何创建 AJAX  
+    * XMLHttpRequest 对象的工作流程
+    * 兼容性处理
+    * 事件的触发条件
+    * 事件的触发顺序
+
+    ```
+      function(options) {
+        var xhr = XMLHttpRequest ? new XMLHttpRequest() : new window.ActiveXObject('Microsoft.XMLHTTP')
+        
+        xhr.open(type, url, true)
+        xhr.send()
+        xhr.onload = function() {
+          if (xhr.status === 200 || xhr.status === 304) {
+            var res;
+            res = xhr.responseText
+            // 成功
+          } else {
+            // 失败
+          }
+        }
+      }
+    ```
+
   * 跨域通信的几种方式
+    * JSONP 运行一个 script 标签 window 挂载一个 callback 函数，script 加载完成以后会执行 callback 函数
+    * Hash
+    利用 hash，场景是当前页面 A 通过 iframe 或 frame 嵌入了跨域的页面 B
+    ```
+      // 在 A 中伪代码如下：
+      var B = document.getElementsByTagName('iframe')
+      B.src = B.src + '#' + 'data';
+      // 在 B 中的伪代码如下
+      window.onhashchange = function() {
+        var data = window.location.hash
+      }
+    ```
+    * postMessage
+    ```
+      // 窗口A(http://A.com) 向跨域的窗口 B (http://B.com)发送信息
+      Bwindow.postMessage('data', 'http://B.com')
+      // 在窗口 B 中监听
+      window.addEventListener('message', function(event) {
+        console.log(event.origin); // http://A.com
+        console.log(event.source); // Awindow
+        console.log(event.data); // data!
+      }, false)
+    ```
+
+    * WebSocket
+    ```
+      var ws = new WebSocket('wss://echo.websocket.org');
+
+      ws.onopen = function(evt) {
+        console.log('connection open ...');
+        ws.send('hello websockets');
+      }
+
+      ws.onmessage = function(evt) {
+        console.log('Received Message:' + evt.data);
+        ws.close();
+      }
+
+      ws.onclose = function(evt) {
+        console.log('connection closed');
+      }
+    ```
+    * CORS
+
+    ```
+      // url (必须)，options (可选)
+      fetch('/some/url', {
+        method: 'get',
+      }).then(function (res) {
+
+      }).catch(function (err) {
+
+      })
+    ```
+8.安全类
+  * CSRF
+    * 基本概念和缩写 称为跨站请求伪造，英文名 Cross-site request forgery 缩写 CSRF
+    * 攻击原理 用户登陆网站 A，网站 A 下发 cookie，用户访问网站 B 的时候，网站 B 引诱点击去请求网站 A 的同时带着网站 A 的 cookie，做一些攻击操作
+    能够造成攻击的原理：1.网站中某一个接口存在漏洞 2.这个用户在那个网站确实登陆过
+    * 防御措施
+      1. token 验证
+      2. Referer 验证 (页面来源)
+      3. 隐藏令牌 (隐藏到 HTTP header 头中)
+  * XSS
+    * 基本概念和缩写 XSS (cross-site scripting 跨域脚本攻击)
+    * 攻击原理 向页面注入 js 脚本
+    * 防御措施 宗旨就是让注入的 js 脚本不能执行
+
+9. 算法类
+  * 排序 快速排序、选择排序、希尔排序、冒泡排序
+  * 堆栈、队列、链表
+  * 递归
+    https://segmentfault.com/a/1190000009857470
+  * 波兰式和逆波兰式
+    理论 http://www.cnblogs.com/chenying99/p/3675876.html
+    源码 https://github.com/Tairraos/rpn.js/blob/master/rpn.js
+
+10. 渲染机制
+   * 什么是 DOCTYPE 及作用
+    DTD(document type difinition，文档类型定义)是一系列的语法规则，用来定义 XML 或 (X)HTML 的文件类型。浏览器会使用它来判断文档类型，决定使用何种协议来解析，以及切换浏览器模式。
+
+    DOCTYPE 是用来声明文档类型和 DTD 规范的，一个主要的用途便是文件的合法性验证。如果文件代码不合法，那么浏览器解析时便会出一些差错。
+    * HTML 5
+      <!DOCTYPE html>
+    * HTML 4.01 Strict
+    * HTML 4.01 Transitional
+
+
+   * 浏览器渲染过程
+    ![浏览器渲染过程](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B.png)
+    
+   * 重排 Reflow
+   * 重绘 Repaint
+   * 布局 Layout
+
