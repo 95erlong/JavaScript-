@@ -382,8 +382,77 @@
 
    * 浏览器渲染过程
     ![浏览器渲染过程](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B.png)
-    
+
    * 重排 Reflow
+    * 定义：DOM 结构中的各个元素都有自己的盒子(模型)，这些都需要浏览器根据各种样式来计算并根据计算结果将元素放到它该出现的位置，这个过程称之为 reflow
+    * 触发 Reflow
+      1. 当增加、删除、修改 DOM 结点时，会导致 Reflow 或 Repaint
+      2. 当移动 DOM 的位置，或是搞个动画的时候
+      3. 当修改 CSS 样式的时候
+      4. 当 Resize 窗口的时候(移动端没有这个问题)，或是滚动的时候
+      5. 当修改网页的默认字体时
    * 重绘 Repaint
+    * 定义：当各种盒子的位置、大小及其他属性，例如颜色、字体大小等都确定下来后，浏览器于是便把这些元素都按照各自的特性绘制了一遍，于是页面的内容出现了，这个过程称之为 repaint 
+    * 触发 Repaint
+      1. DOM 改动
+      2. CSS 改动
    * 布局 Layout
 
+11. 运行机制类
+  * 异步任务
+    * setTimeout 和 setInterval
+    * DOM 事件
+    * ES6 中的 Promise
+
+12. 页面性能类
+  题目：提升页面性能的方法有哪些？
+  1. 资源压缩合并，减少 HTTP 请求
+  2. 非核心代码异步加载 
+    * 异步加载的方式
+      1. 动态脚本加载 document.creatElement 加载到 body 中，动态创建结点
+      2. defer (script 标签加上)
+      3. async (script 标签加上)
+
+    * 异步加载的区别
+      1. defer 是在HTML 解析完成之后才会执行，如果是多个，按照加载的顺讯依次执行
+      2. async 是在加载完之后立即执行，如果是多个，执行顺讯和加载顺讯无关
+
+  3. 利用浏览器缓存
+    * 缓存的分类
+      1. 强缓存 在时间范围内 直接拿浏览器的缓存
+        Expires Expires: THu, 21 Jan 2017 23:39:02 GMT // 服务器的绝对时间
+        Cache-Control Cache-Control: max-age=3600 // 相对时间 
+      
+      2. 协商缓存
+        Last-Modified (上次修改时间) If-Modified-Since (下次拿着 Last-Modified 请求) Last-Modified: Web, 26 Jan 2017 00: 35: 11 GMT
+        Etag (hash 值) If-None-Match (下次拿着 Etag 值请求)
+
+    * 缓存的原理
+  4. 使用 CDN
+  5. 预解析 DNS 
+    * <meta http-equiv="x-dns-prefetch-control" content="on"> // 强制打开 DNS 预解析
+    * <link rel="dns-prefetch" href="//host_name_to_prefetch.com">
+
+13. 错误监控类
+  * 前端错误的分类
+    * 即时运行错误：代码错误
+    * 资源加载错误
+
+  * 错误的捕获方式
+    * 即时运行错误的捕获方式
+      1. try..catch 
+      2. window.onerror
+    
+    * 资源加载错误
+      1. object.onerror // 例如 img.onerror
+      2. performance.getEntries() // 获取到所有已加载资源的加载时长，可以间接的拿到加载资源的加载错误
+      3. Error 事件捕获，捕获阶段
+
+      延伸：跨域的 JS 运行错误可以捕获，错误信息统一为 Script error，出错行号和出错列好都为 0，因为跨域了，这个的解决方式
+      1. 在客户端的 script 标签增加 crossorigin 属性
+      2. 服务器设置 JS 资源响应头 Access-Control-Allow-Origin: * (或是白名单)
+
+  * 上报错误的基本原理
+    1. 采用 Ajax 通信的方式上报
+    2. 利用 Image 对象上报
+    
