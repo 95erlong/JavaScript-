@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>面向对象</title>
+</head>
+<body>
+  <script type='text/javascript'>
+    // 类的声明
+    function Animal() {
+      this.name = 'name';
+    }
+
+    // ES 6 中的 class 的声明
+    class Animal2 {
+      constructor(name) {
+        this.name = name
+      }
+    }
+
+    // 借助构造函数实现继承 实现部分继承，父类 prototype 有方法的话，继承不到
+    function Parent1() {
+      this.name = 'parent1'
+    }
+    function Child1() {
+      Parent1.call(this); // apply
+      this.type = 'child1';
+    }
+
+    // 借用原型链实现继承 缺点是原型链中的原型对象是公用的，
+    function Parent2() {
+      this.name = 'parent2';
+    }
+    function Child2() {
+      this.type = 'child2'
+    }
+
+    Child2.prototype = new Parent2()
+
+    var child2 = new Child2()
+
+    // 组合方式
+    function Parent3() {
+      this.name = 'parent3'
+    }
+    function Child3() {
+      Parent3.call(this);
+      this.type = 'child3';
+    }
+    Child3.prototype = new Parent3();
+
+    // 组合继承的优化1
+    function Parent4() {
+      this.name = 'parent5'
+    }
+    function Child4() {
+      Parent4.call(this);
+      this.type = 'child4';
+    }
+    Child4.prototype = Parent4.prototype;
+
+    // 组合继承优化2
+    function Parent5() {
+      this.name = 'parent5'
+    }
+    function Child5() {
+      Parent5.call(this);
+      this.type = 'child5';
+    }
+    Child5.prototype = Object.create(Parent5.prototype);
+    Child5.prototype.constructor = Child5;
+    var c5 = new Child5()
+
+  </script>
+</body>
+</html>

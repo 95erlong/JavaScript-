@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event</title>
+</head>
+<body>
+  <div id="ev">
+    <style>
+      #ev{
+        width: 300px;
+        height: 100px;
+        background: red;
+        color: #fff;
+        text-align: center;
+        line-height: 100px;
+      }
+    </style>
+    目标元素
+  </div>
+  <script>
+    var ev = document.getElementById('ev')
+    window.addEventListener('click', function() {
+      console.log('====================================');
+      console.log('window captrue');
+      console.log('====================================');
+    }, true);
+    document.addEventListener('click', function() {
+      console.log('====================================');
+      console.log('document captrue');
+      console.log('====================================');
+    }, true)
+
+    document.documentElement.addEventListener('click', function() {
+      console.log('====================================');
+      console.log('html captrue');
+      console.log('====================================');
+    }, true)
+
+    document.body.addEventListener('click', function() {
+      console.log('====================================');
+      console.log('body captrue');
+      console.log('====================================');
+    }, true)
+
+    ev.addEventListener('click', function() {
+      console.log('====================================');
+      console.log('ev captrue');
+      console.log('====================================');
+    }, true)
+
+    var eve = new Event('test')
+    ev.addEventListener('test', function() {
+      console.log('test dispatch')
+    }, true)
+
+    ev.dispatchEvent(eve)
+
+  </script>
+</body>
+</html>
