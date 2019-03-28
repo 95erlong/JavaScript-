@@ -455,4 +455,20 @@
   * 上报错误的基本原理
     1. 采用 Ajax 通信的方式上报
     2. 利用 Image 对象上报
+
+14. MVVM 框架类
+  1. MVVM 框架 React Vue Angular
+  2. 谈谈对 MVVM 的认识
+    1. 先聊 MVC
+    2. 聊聊 MVVM 的定义
+
+  3. 双向绑定是什么原理，可以写出来
+    1. Object.defineProperty 的用法要熟记于心
+    2. object.definProperty 与 reflect.defineProperty 的区别
+    3. object.definProperty 要会手写
+
+  4. 使用了什么设计模式
+    ![观察者模式](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.png)
     
+  5. 生命周期是什么
+  6. 有看过源码吗？
