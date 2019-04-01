@@ -467,7 +467,7 @@
     2. object.definProperty 与 reflect.defineProperty 的区别
     3. object.definProperty 要会手写
 
-  4. 使用了什么设计模式,a,a
+  4. 使用了什么设计模式
     ![观察者模式](https://github.com/95erlong/JavaScript-basic-knowledge/blob/master/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.png)
 
     注意：
